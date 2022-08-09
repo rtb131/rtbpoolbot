@@ -15,7 +15,7 @@ blockfrost_api_key = credentials.blockfrost_api_key
 # Tutorial on how to create a Discord bot account: https://discordpy.readthedocs.io/en/stable/discord.html
 bot_token = credentials.bot_token
 
-# Please change the channel id to the channel you want the bot to send messages in
+# Please change the channel id to the channel you want the bot to send delegator updates in
 bot_channel_id = 898682445174546435 
 
 client_id = credentials.client_id
