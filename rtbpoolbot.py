@@ -40,7 +40,7 @@ class RtbPoolBotClient(discord.Client):
             req = requests.get(f"{api_base_url}/pools/{pool_id}", headers=headers).text
             data = json.loads(req)
 
-            current_delegators = data["live_delegators"]
+            current_delegators = int(data["live_delegators"])-1
             live_stake = round(int(data["live_stake"]) / 1000000, 2)
             active_stake = round(int(data["active_stake"]) / 1000000, 2)
 
@@ -103,7 +103,7 @@ class RtbPoolBotClient(discord.Client):
                 req = requests.get(f"{api_base_url}/pools/{pool_id}", headers=headers).text
 
                 data = json.loads(req)
-                live_delegators = data["live_delegators"]
+                live_delegators = int(data["live_delegators"])-1
                 live_stake = round(int(data["live_stake"]) / 1000000, 2)
                 active_stake = round(int(data["active_stake"]) / 1000000, 2)
 
