@@ -48,7 +48,7 @@ class RtbPoolBotClient(discord.Client):
                 if current_delegators > last_delegator_count:
 
                     # --------------- DISCORD EMBED CODE ---------------
-                    embedVar = discord.Embed(title="New Delegator", description="🩸 A new delegator joined [RTB] pool! 🩸\n⠀", color=0xff0000)
+                    embedVar = discord.Embed(title="New Delegator", description="🩸 A new delegator has joined [RTB] pool! 🩸\n⠀", color=0xff0000)
                     embedVar.add_field(name="Delegators", value=str(last_delegator_count) + " 🠮 " + str(current_delegators) + "\n⠀", inline=False)
                     embedVar.add_field(name="Total Stake", value="Live: " + str(live_stake) + " ₳\n" + "Active: " + str(active_stake) + " ₳\n⠀", inline=False)
                     embedVar.add_field(name="Join [RTB]", value="[on pool.pm](https://pool.pm/e116bf936475165924795ae3f2dda01ab4a893ad8444a1364dd5886b/stake)", inline=False)
