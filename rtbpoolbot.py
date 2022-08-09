@@ -4,6 +4,8 @@ import requests
 import json
 import asyncio
 from datetime import datetime
+from numerize import numerize
+
 
 # Set the API key in credentials.py according to the key you see in your blockfrost dashboard.
 # You can create a blockfrost API key for free on https://blockfrost.io/
@@ -16,15 +18,23 @@ bot_token = credentials.bot_token
 # Please change the channel id to the channel you want the bot to send messages in
 bot_channel_id = 898682445174546435 
 
+client_id = credentials.client_id
 api_base_url = 'https://cardano-mainnet.blockfrost.io/api/v0'
 headers = {'Accept': 'application/json', 'project_id': blockfrost_api_key}
 pool_id = 'pool1uyttlymyw5t9jfrett3l9hdqr2623yads3z2zdjd6kyxkg8hpn7'
+idx = 0
+
+
 
 
 class RtbPoolBotClient(discord.Client):
+
+
+        
+
     async def background_task():
         await client.wait_until_ready()
-
+        
         global current_delegators
         global last_delegator_count
 
@@ -57,16 +67,35 @@ class RtbPoolBotClient(discord.Client):
 
             last_delegator_count = current_delegators
 
-            # request delegator status every 60 seconds
-            await asyncio.sleep(60)
 
-        await asyncio.sleep(60)
+            await RtbPoolBotClient.switch_presence_text(current_delegators, live_stake)
+            
+            # request status every 20 seconds
+            await asyncio.sleep(20)
 
+
+    async def switch_presence_text(current_delegators, live_stake):
+        global idx
+        presence_text = [
+            "Charles",
+            f"{current_delegators} Delegators",
+            f"{numerize.numerize(live_stake)} ₳ Live Stake"
+        ]
+
+        if "₳" in presence_text[idx]:
+            activity_type = discord.ActivityType.watching
+        else:
+            activity_type = discord.ActivityType.listening
+
+        await client.change_presence(status=discord.Status.do_not_disturb, activity=discord.Activity(type=activity_type, name=presence_text[idx]))
+        idx = (idx + 1) % len(presence_text)
+        
 
     async def on_ready(self):
-        print('Logged in as')
-        print(self.user.name)
-        print(self.user.id)
+        print('------')
+        print('Starting Bot')
+        print(f"Name: {self.user.name}")
+        print(f"ID: {self.user.id}")
         print('------')
         client.loop.create_task(RtbPoolBotClient.background_task())
 
