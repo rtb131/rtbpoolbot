@@ -25,13 +25,7 @@ pool_id = 'pool1uyttlymyw5t9jfrett3l9hdqr2623yads3z2zdjd6kyxkg8hpn7'
 idx = 0
 
 
-
-
 class RtbPoolBotClient(discord.Client):
-
-
-        
-
     async def background_task():
         await client.wait_until_ready()
         
@@ -46,11 +40,9 @@ class RtbPoolBotClient(discord.Client):
             req = requests.get(f"{api_base_url}/pools/{pool_id}", headers=headers).text
             data = json.loads(req)
 
-
             current_delegators = data["live_delegators"]
             live_stake = round(int(data["live_stake"]) / 1000000, 2)
             active_stake = round(int(data["active_stake"]) / 1000000, 2)
-
 
             if last_delegator_count != -1:
                 if current_delegators > last_delegator_count:
@@ -66,7 +58,6 @@ class RtbPoolBotClient(discord.Client):
                     await channel.send(embed=embedVar)
 
             last_delegator_count = current_delegators
-
 
             await RtbPoolBotClient.switch_presence_text(current_delegators, live_stake)
             
