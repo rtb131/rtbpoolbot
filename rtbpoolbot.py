@@ -18,7 +18,7 @@ bot_token = credentials.bot_token
 # Please change the channel id to the channel you want the bot to send delegator updates in
 bot_channel_id = 898682445174546435 
 
-client_id = credentials.client_id
+
 api_base_url = 'https://cardano-mainnet.blockfrost.io/api/v0'
 headers = {'Accept': 'application/json', 'project_id': blockfrost_api_key}
 pool_id = 'pool1uyttlymyw5t9jfrett3l9hdqr2623yads3z2zdjd6kyxkg8hpn7'
